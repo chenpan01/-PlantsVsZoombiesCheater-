@@ -1,5 +1,5 @@
 
-// jsMFCDlg.cpp : ÊµÏÖÎÄ¼ş
+// jsMFCDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -12,20 +12,20 @@
 #endif
 
 
-// ÓÃÓÚÓ¦ÓÃ³ÌĞò¡°¹ØÓÚ¡±²Ëµ¥ÏîµÄ CAboutDlg ¶Ô»°¿ò
+// ç”¨äºåº”ç”¨ç¨‹åºâ€œå…³äºâ€èœå•é¡¹çš„ CAboutDlg å¯¹è¯æ¡†
 
 class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_ABOUTBOX };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
-// ÊµÏÖ
+// å®ç°
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -43,7 +43,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CjsMFCDlg ¶Ô»°¿ò
+// CjsMFCDlg å¯¹è¯æ¡†
 
 
 
@@ -124,21 +124,21 @@ int *get3Point(int base, int p1, int p2, int p3)
 
 BOOL InitWaigua()
 {
-	HWND hWnd = FindWindow(NULL, TEXT("Plants vs. Zombies 1.2.0.1073 ¡¾´«ÖÇ²¥¿ÍC++Ñ§Ôº¡¿"));
+	HWND hWnd = FindWindow(NULL, TEXT("Plants vs. Zombies 1.2.0.1073"));
 	if (NULL == hWnd)
 	{
-		//AfxMessageBox(TEXT("²éÕÒ´°¿ÚÊ§°Ü"));
+		//AfxMessageBox(TEXT("æŸ¥æ‰¾çª—å£å¤±è´¥"));
 		return FALSE;
 	}
 
 	DWORD dwProcessId;
 	GetWindowThreadProcessId(hWnd, &dwProcessId);
 
-	//»ñÈ¡½ø³Ì¾ä±ú
+	//è·å–è¿›ç¨‹å¥æŸ„
 	hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwProcessId);
 	if (NULL == hProcess)
 	{
-		//AfxMessageBox(TEXT("´ò¿ª½ø³ÌÊ§°Ü"));
+		//AfxMessageBox(TEXT("æ‰“å¼€è¿›ç¨‹å¤±è´¥"));
 		return FALSE;
 	}
 
@@ -174,7 +174,7 @@ void ModifyColdTime()
 	ReadProcessMemory(hProcess, pCount, &iCount, 4, NULL);
 	for (int i = 0; i < iCount; i++)
 	{
-		//pFirst[0] = pFirst[1];//¶ÁºÍĞ´
+		//pFirst[0] = pFirst[1];//è¯»å’Œå†™
 
 		int iRecoveryTime;
 		ReadProcessMemory(hProcess, pFirst + 1, &iRecoveryTime, 4, NULL);
@@ -184,7 +184,7 @@ void ModifyColdTime()
 	}
 }
 
-// CjsMFCDlg ÏûÏ¢´¦Àí³ÌĞò
+// CjsMFCDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 BOOL IsSunUnlimite = FALSE, IsMoneyUnlimite = FALSE, IsColdTimeZero = FALSE;
 DWORD WINAPI WaiguaThread(LPVOID lpParameter)
 {
@@ -192,19 +192,19 @@ DWORD WINAPI WaiguaThread(LPVOID lpParameter)
 	while (1)
 	{
 		Sleep(1000);
-		//¼ì²âÓÎÏ·ÊÇ·ñÆô¶¯
+		//æ£€æµ‹æ¸¸æˆæ˜¯å¦å¯åŠ¨
 		if (InitWaigua())
 		{
-			//¼ì²âµ½ÁËÓÎÏ·
-			dlg->SetDlgItemText((int)IDC_STATIC10, TEXT("ÒÑ¾­¼ì²âµ½ÓÎÏ·Æô¶¯"));
+			//æ£€æµ‹åˆ°äº†æ¸¸æˆ
+			dlg->SetDlgItemText((int)IDC_STATIC10, TEXT("å·²ç»æ£€æµ‹åˆ°æ¸¸æˆå¯åŠ¨"));
 
-			//±£´æÔ­À´µÄÈı¸ö×Ö½Ú
+			//ä¿å­˜åŸæ¥çš„ä¸‰ä¸ªå­—èŠ‚
 			//ReadProcessMemory(hProcess, pCode, oldOpCode, 3, NULL);
 		}
 		else
 		{
-			//ÉèÖÃ´°¿Ú×´Ì¬£¬Ã»ÓĞ¼ì²âµ½ÓÎÏ·
-			dlg->SetDlgItemText((int)IDC_STATIC10, TEXT("Î´¼ì²âµ½ÓÎÏ·Æô¶¯"));
+			//è®¾ç½®çª—å£çŠ¶æ€ï¼Œæ²¡æœ‰æ£€æµ‹åˆ°æ¸¸æˆ
+			dlg->SetDlgItemText((int)IDC_STATIC10, TEXT("æœªæ£€æµ‹åˆ°æ¸¸æˆå¯åŠ¨"));
 			continue;
 		}
 
@@ -235,9 +235,9 @@ BOOL CjsMFCDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// ½«¡°¹ØÓÚ...¡±²Ëµ¥ÏîÌí¼Óµ½ÏµÍ³²Ëµ¥ÖĞ¡£
+	// å°†â€œå…³äº...â€èœå•é¡¹æ·»åŠ åˆ°ç³»ç»Ÿèœå•ä¸­ã€‚
 
-	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
+	// IDM_ABOUTBOX å¿…é¡»åœ¨ç³»ç»Ÿå‘½ä»¤èŒƒå›´å†…ã€‚
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -255,19 +255,19 @@ BOOL CjsMFCDlg::OnInitDialog()
 		}
 	}
 
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£  µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚  å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
 	ShowWindow(SW_MINIMIZE);
 
-	// TODO:  ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
-	//´´½¨Ïß³ÌÀ´²»Í£ĞŞ¸ÄÑô¹â¡£¡£¡£¡£¡£
+	// TODO:  åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
+	//åˆ›å»ºçº¿ç¨‹æ¥ä¸åœä¿®æ”¹é˜³å…‰ã€‚ã€‚ã€‚ã€‚ã€‚
 
 	CreateThread(0, 0, WaiguaThread, this, 0, 0);
 	
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
 void CjsMFCDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -283,19 +283,19 @@ void CjsMFCDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// Èç¹ûÏò¶Ô»°¿òÌí¼Ó×îĞ¡»¯°´Å¥£¬ÔòĞèÒªÏÂÃæµÄ´úÂë
-//  À´»æÖÆ¸ÃÍ¼±ê¡£  ¶ÔÓÚÊ¹ÓÃÎÄµµ/ÊÓÍ¼Ä£ĞÍµÄ MFC Ó¦ÓÃ³ÌĞò£¬
-//  Õâ½«ÓÉ¿ò¼Ü×Ô¶¯Íê³É¡£
+// å¦‚æœå‘å¯¹è¯æ¡†æ·»åŠ æœ€å°åŒ–æŒ‰é’®ï¼Œåˆ™éœ€è¦ä¸‹é¢çš„ä»£ç 
+//  æ¥ç»˜åˆ¶è¯¥å›¾æ ‡ã€‚  å¯¹äºä½¿ç”¨æ–‡æ¡£/è§†å›¾æ¨¡å‹çš„ MFC åº”ç”¨ç¨‹åºï¼Œ
+//  è¿™å°†ç”±æ¡†æ¶è‡ªåŠ¨å®Œæˆã€‚
 
 void CjsMFCDlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ÓÃÓÚ»æÖÆµÄÉè±¸ÉÏÏÂÎÄ
+		CPaintDC dc(this); // ç”¨äºç»˜åˆ¶çš„è®¾å¤‡ä¸Šä¸‹æ–‡
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Ê¹Í¼±êÔÚ¹¤×÷Çø¾ØĞÎÖĞ¾ÓÖĞ
+		// ä½¿å›¾æ ‡åœ¨å·¥ä½œåŒºçŸ©å½¢ä¸­å±…ä¸­
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -303,7 +303,7 @@ void CjsMFCDlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// »æÖÆÍ¼±ê
+		// ç»˜åˆ¶å›¾æ ‡
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
@@ -312,8 +312,8 @@ void CjsMFCDlg::OnPaint()
 	}
 }
 
-//µ±ÓÃ»§ÍÏ¶¯×îĞ¡»¯´°¿ÚÊ±ÏµÍ³µ÷ÓÃ´Ëº¯ÊıÈ¡µÃ¹â±ê
-//ÏÔÊ¾¡£
+//å½“ç”¨æˆ·æ‹–åŠ¨æœ€å°åŒ–çª—å£æ—¶ç³»ç»Ÿè°ƒç”¨æ­¤å‡½æ•°å–å¾—å…‰æ ‡
+//æ˜¾ç¤ºã€‚
 HCURSOR CjsMFCDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
@@ -323,46 +323,46 @@ HCURSOR CjsMFCDlg::OnQueryDragIcon()
 
 void CjsMFCDlg::OnBnClickedButton1()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	IsSunUnlimite = TRUE;
 }
 
 
 void CjsMFCDlg::OnBnClickedButton2()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	IsSunUnlimite = FALSE;
 }
 
 
 void CjsMFCDlg::OnBnClickedButton3()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	IsMoneyUnlimite = TRUE;
 }
 
 
 void CjsMFCDlg::OnBnClickedButton4()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	IsMoneyUnlimite = FALSE;
 }
 
 
 void CjsMFCDlg::OnBnClickedButton5()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	IsColdTimeZero = TRUE;
 }
 
 
 void CjsMFCDlg::OnBnClickedButton6()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	IsColdTimeZero = FALSE;
 }
 
-//½ûÓÃÔİÍ£
+//ç¦ç”¨æš‚åœ
 
 void NoPause()
 {
@@ -382,14 +382,14 @@ void YesPause()
 
 void CjsMFCDlg::OnBnClickedButton8()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	NoPause();
 }
 
 
 void CjsMFCDlg::OnBnClickedButton7()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	YesPause();
 }
 
@@ -401,7 +401,7 @@ void ModifyGuanka(int iGuanka)
 
 void CjsMFCDlg::OnBnClickedButton9()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 
 	UpdateData();
 
@@ -410,12 +410,12 @@ void CjsMFCDlg::OnBnClickedButton9()
 	long lSmallGuan = wcstol(mSmallGuan, &pStopstring, 10);
 	if (lBigGuan < 1 || lBigGuan > 6)
 	{
-		AfxMessageBox(TEXT("´ó¹Ø¹Ø¿¨²»ºÏ¸ñ"));
+		AfxMessageBox(TEXT("å¤§å…³å…³å¡ä¸åˆæ ¼"));
 		return;
 	}
 	if (lSmallGuan < 1 || lSmallGuan > 10)
 	{
-		AfxMessageBox(TEXT("Ğ¡¹Ø¹Ø¿¨²»ºÏ¸ñ"));
+		AfxMessageBox(TEXT("å°å…³å…³å¡ä¸åˆæ ¼"));
 		return;
 	}
 
