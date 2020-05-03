@@ -1,4 +1,4 @@
-// jsConsole.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// jsConsole.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
@@ -84,7 +84,7 @@ DWORD WINAPI ModifyCDThread(
 {
 	while (1)
 	{
-		//ĞŞ¸ÄÑô¹â
+		//ä¿®æ”¹é˜³å…‰
 		ModifySun();
 		int *pCount = get3Point(base, 0x868, 0x15c, 0x24);
 		if (pCount == NULL)
@@ -99,7 +99,7 @@ DWORD WINAPI ModifyCDThread(
 		ReadProcessMemory(hProcess, pCount, &iCount, 4, NULL);
 		for (int i = 0; i < iCount; i++)
 		{
-			//pFirst[0] = pFirst[1];//¶ÁºÍĞ´
+			//pFirst[0] = pFirst[1];//è¯»å’Œå†™
 
 			int iRecoveryTime;
 			ReadProcessMemory(hProcess, pFirst + 1, &iRecoveryTime, 4, NULL);
@@ -119,23 +119,23 @@ void ModifyCD()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	//»ñÈ¡ÓÎÏ·´°¿ÚËùÔÚ½ø³ÌµÄ½ø³ÌID£¬Ò²¾ÍÊÇPID
-	HWND hWnd = FindWindow(NULL, TEXT("Plants vs. Zombies 1.2.0.1073 ¡¾´«ÖÇ²¥¿ÍC++Ñ§Ôº¡¿"));
+	//è·å–æ¸¸æˆçª—å£æ‰€åœ¨è¿›ç¨‹çš„è¿›ç¨‹IDï¼Œä¹Ÿå°±æ˜¯PID
+	HWND hWnd = FindWindow(NULL, TEXT("Plants vs. Zombies"));
 	if (NULL == hWnd)
 	{
-		printf("²éÕÒ´°¿ÚÊ§°Ü\n");
+		printf("æŸ¥æ‰¾çª—å£å¤±è´¥\n");
 		return 0;
 	}
 	
 	DWORD dwProcessId;
 	GetWindowThreadProcessId(hWnd, &dwProcessId);
-	printf("½ø³ÌID:%d\n", dwProcessId);
+	printf("è¿›ç¨‹ID:%d\n", dwProcessId);
 	
-	//»ñÈ¡½ø³Ì¾ä±ú
+	//è·å–è¿›ç¨‹å¥æŸ„
 	hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwProcessId);
 	if (NULL == hProcess)
 	{
-		printf("´ò¿ª½ø³ÌÊ§°Ü\n");
+		printf("æ‰“å¼€è¿›ç¨‹å¤±è´¥\n");
 		return 0;
 	}
 
